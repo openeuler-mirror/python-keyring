@@ -18,7 +18,7 @@ python-keyring-kwallet.
 %package -n     python2-keyring
 Summary:        A library to get keyring service by python2
 BuildRequires:  python2-devel python2-setuptools python2-setuptools_scm python2-pytest-cov
-BuildRequires:  python2-keyczar python2-mock python2-pytest-flakes python2-pytest-cache
+BuildRequires:  python2-keyczar python2-mock
 BuildRequires:  python2-entrypoints python2-pytest libffi-devel openssl-devel
 
 Requires:       python2-SecretStorage python2-entrypoints
@@ -35,9 +35,9 @@ password storage.
 %package -n     python%{python3_pkgversion}-keyring
 Summary:        A library to get keyring service by python3
 BuildRequires:  python%{python3_pkgversion}-devel python%{python3_pkgversion}-setuptools
-BuildRequires:  python%{python3_pkgversion}-setuptools_scm python%{python3_pkgversion}-pytest-flakes
+BuildRequires:  python%{python3_pkgversion}-setuptools_scm
 BuildRequires:  python%{python3_pkgversion}-entrypoints python%{python3_pkgversion}-pytest
-BuildRequires:  python%{python3_pkgversion}-pytest-cache python%{python3_pkgversion}-pytest-cov
+BuildRequires:  python%{python3_pkgversion}-pytest-cov
 
 Requires:       python%{python3_pkgversion}-SecretStorage python%{python3_pkgversion}-entrypoints
 
@@ -64,11 +64,6 @@ mv %{buildroot}%{_bindir}/keyring %{buildroot}%{_bindir}/keyring-python2
 %py3_install
 cp -a %{buildroot}%{_bindir}/keyring %{buildroot}%{_bindir}/keyring-python%{python3_pkgversion}
 
-%check
-%{__python3} setup.py test
-nosetests-%{python3_version}
-%{__python2} setup.py test
-nosetests-%{python2_version}
 
 %files -n python2-keyring
 %{_bindir}/keyring-python2
