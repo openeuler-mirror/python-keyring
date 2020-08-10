@@ -1,6 +1,6 @@
 Name:           python-keyring
 Version:        13.2.1
-Release:        4
+Release:        5
 Summary:        Python library to access the system keyring service
 License:        MIT and Python
 URL:            https://github.com/jaraco/keyring
@@ -14,23 +14,6 @@ password storage.
 This package only provides file-based pseudo-keyrings. To interface with
 gnome-keyring or KWallet, please install one of python-keyring-gnome or
 python-keyring-kwallet.
-
-%package -n     python2-keyring
-Summary:        A library to get keyring service by python2
-BuildRequires:  python2-devel python2-setuptools python2-setuptools_scm python2-pytest-cov
-BuildRequires:  python2-keyczar python2-mock
-BuildRequires:  python2-entrypoints python2-pytest libffi-devel openssl-devel
-
-Requires:       python2-SecretStorage python2-entrypoints
-
-%{?python_provide:%python_provide python2-keyring}
-
-Obsoletes:      %{name}-kwallet < %{version}-%{release} %{name}-gnome < %{version}-%{release}
-
-%description -n python2-keyring
-The Python keyring lib provides a easy way to access the system keyring
-service from python. It can be used in any application that needs safe
-password storage.
 
 %package -n     python%{python3_pkgversion}-keyring
 Summary:        A library to get keyring service by python3
@@ -55,20 +38,11 @@ sed -i '1{\@^#!/usr/bin/env python@d}' keyring/cli.py
 sed -i -e "\@use_vcs_version@s/^.*$/\tversion = \"%{version}\",/g" -e {/\'hgtools\'/d} setup.py
 
 %build
-%py2_build
 %py3_build
 
 %install
-%py2_install
-mv %{buildroot}%{_bindir}/keyring %{buildroot}%{_bindir}/keyring-python2
 %py3_install
 cp -a %{buildroot}%{_bindir}/keyring %{buildroot}%{_bindir}/keyring-python%{python3_pkgversion}
-
-
-%files -n python2-keyring
-%{_bindir}/keyring-python2
-%{python2_sitelib}/{keyring,keyring-%{version}-py%{python2_version}.egg-info}
-%doc CHANGES.rst README.rst
 
 %files -n python%{python3_pkgversion}-keyring
 %{_bindir}/{keyring-python%{python3_pkgversion},keyring}
@@ -76,6 +50,9 @@ cp -a %{buildroot}%{_bindir}/keyring %{buildroot}%{_bindir}/keyring-python%{pyth
 %doc CHANGES.rst README.rst
 
 %changelog
+* Mon Aug 10 2020 lingsheng <lingsheng@huawei.com> - 13.2.1-5
+- Remove python2-keyring subpackage
+
 * Thu Nov 28 2019 wutao <wutao61@huawei.com> - 13.2.1-4
 - Package init
 
