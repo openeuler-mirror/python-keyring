@@ -1,11 +1,11 @@
 %global _empty_manifest_terminate_build 0
 Name:           python-keyring
-Version:        21.5.0
+Version:        23.0.0
 Release:        1
 Summary:        Store and access your passwords safely.
 License:        MIT License
 URL:            https://github.com/jaraco/keyring
-Source0:        https://files.pythonhosted.org/packages/c9/5a/c7aefc112d75872ea2099c494b84ba6e108b20584264929e614c60939368/keyring-21.5.0.tar.gz
+Source0:        https://files.pythonhosted.org/packages/source/k/keyring/keyring-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  python3-setuptools_scm
 BuildRequires:  python3-toml
@@ -31,6 +31,8 @@ Summary:	Store and access your passwords safely.
 Provides:	python-keyring
 BuildRequires:	python3-devel
 BuildRequires:	python3-setuptools
+BuildRequires:  python3-pip
+
 %description -n python3-keyring
 On Linux, the KWallet backend relies on dbus-python_, which does not always
 install correctly when using pip (compilation is needed). For best results,
@@ -78,6 +80,7 @@ popd
 mv %{buildroot}/filelist.lst .
 mv %{buildroot}/doclist.lst .
 
+
 %files -n python3-keyring -f filelist.lst
 %dir %{python3_sitelib}/*
 
@@ -85,6 +88,9 @@ mv %{buildroot}/doclist.lst .
 %{_pkgdocdir}
 
 %changelog
+* Wed Jul 14 2021 huangtianhua <huangtianhua@huawei.com> - 23.0.0-1
+- Upgrade to 23.0.0 to support OpenStack-W
+
 * Thu 03 2020 baizhonggui <baizhonggui@huawei.com> - 21.5.0-1
 - Update to 21.5.0
 
